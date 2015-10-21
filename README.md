@@ -8,6 +8,8 @@ This is an expanded version of Esme's SFW. It adds functions for:
 
 -Drawing boxes
 
+-Scaling UI
+
 -Fleshed out key detection to work independently of FPS. 
 
 -Key rebinding support
