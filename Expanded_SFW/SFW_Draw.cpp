@@ -353,3 +353,76 @@ void sfw::drawStringVer(char text[], float x, float y, float h, float w, float s
 	}
 }
 
+void sfw::graphPoly(int terms, float coef[], float length, float X, float Y, bool lengthIsHeight, bool useNegativeX)
+{
+	//ax^n + bx^n ... + c
+	float carry = 0;
+	float temp;
+	float fTemp;
+	float xKeep = X;
+	float yVal = 0;
+	float prevY = Y;
+	float prevX = X;
+	X = 0;
+	if (terms < 1) { terms = 1; }
+
+	for (int a = 0; a < length; a++)
+	{
+		if (terms == 1)
+		{
+			yVal = coef[0] + Y;
+		}
+		else if (terms == 2)
+		{
+			yVal = (X * coef[1]) + coef[0] + Y;
+		}
+		else
+		{
+			carry = 0;
+			for (int b = terms; b != 2; b--)
+			{
+				if (coef[b - 1] != 0)
+				{
+					fTemp = X;
+					for (int c = 0; c < b - 2; c++) { fTemp *= X; }
+					fTemp *= coef[b - 1];
+					carry += fTemp;
+				}
+			}
+			temp = (X * coef[1]) + coef[0] + Y;
+			yVal = carry + temp;
+		}
+
+		X += xKeep;
+
+		if (useNegativeX)
+		{
+			float flipX = X - xKeep; flipX = xKeep - flipX;
+
+			drawLine(flipX, yVal, flipX - 1, yVal - 1);
+			if (lengthIsHeight)
+			{
+				if (yVal >= length + Y) { drawLine(flipX, yVal, flipX + 1, length + Y); a = length; }
+				else if (yVal <= -length + Y) { drawLine(flipX, yVal, flipX + 1, -length + Y); a = length; }
+			}
+			drawLine(prevX, prevY, flipX, yVal);
+			prevX = flipX;
+		}
+		else
+		{
+			drawLine(X, yVal, X - 1, yVal - 1);
+			if (lengthIsHeight)
+			{
+				if (yVal >= length + Y) { drawLine(X, yVal, X + 1, length + Y); a = length; }
+				else if (yVal <= -length + Y) { drawLine(X, yVal, X + 1, -length + Y); a = length; }
+			}
+			drawLine(prevX, prevY, X, yVal);
+			prevX = X;
+		}
+
+		prevY = yVal;
+		X -= xKeep;
+		X++;
+	}
+}
+}

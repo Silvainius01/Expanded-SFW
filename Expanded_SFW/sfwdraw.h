@@ -125,4 +125,17 @@ namespace sfw
 	 *	4: select												   *
 	\***************************************************************/
 	void rebind(char KEY, int fnct);
+
+	/**************************************************************************************\
+	 *	Graphs a polynomial. Example usage:												  *
+	 *																					  *
+	 *	int coef[3] = {5, 2, 4}															  *
+	 *	graphPoly(3, coef, 100, xSpace(1,2), ySpace(1,2), false, false);				  *
+	 *																					  *
+	 *	This will graph 4x^2 + 2x + 5 up to x = 100. The array of coeffiecients passed in *
+	 *	is BACKWARD to how you would write it out!                                        *
+	 *	In this case, if "lengthIsHeight" is true, it would calculate up to y = 100.		  *
+	 *	If "useNegativeX" is true, it will do just that.								  *
+	\**************************************************************************************/
+	void graphPoly(int terms, float coef[], float length, float X, float Y, bool lengthIsHeight, bool useNegativeX);
 }

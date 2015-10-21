@@ -22,6 +22,7 @@ void sfw::rebind(char KEY, int fnct)
 	else if (fnct > 4) { fnct = 4; }
 	key[fnct] = KEY;
 }
+
 void resetKeys()
 {
 	for (int a = 0; a < 5; ++a)
@@ -58,6 +59,7 @@ bool sfw::checkSel()
 		return false;
 	}
 }
+
 int sfw::getControls()
 {
 	for (int a = 0; a < 4; a++)
@@ -72,6 +74,7 @@ int sfw::getControls()
 	resetKeys();
 	return -1;
 }
+
 int sfw::menuChoice(int opts, bool isVertical)
 {
 	opts -= 1;
@@ -112,6 +115,7 @@ int sfw::menuChoice(int opts, bool isVertical)
 	resetKeys();
 	return sel;
 }
+
 char sfw::getInput(bool onlyNum)
 {
 	char press = '#';
