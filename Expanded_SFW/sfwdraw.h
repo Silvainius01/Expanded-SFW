@@ -114,4 +114,15 @@ namespace sfw
 
 	/* Returns any key supported by SFW when false. Only returns numbers when true. */
 	char getInput(bool onlyNum);
+
+	/***************************************************************\ 
+	 * Sets the desired key to the binding for a user interaction. * 
+	 * By default, when fnct is....					 			   *
+	 *	0: Up													   *
+	 *	1: Down									 				   *
+	 *	2: Left													   *
+	 *	3: Right												   *
+	 *	4: select												   *
+	\***************************************************************/
+	void rebind(char KEY, int fnct);
 }

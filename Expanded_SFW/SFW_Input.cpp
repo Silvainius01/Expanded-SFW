@@ -16,6 +16,12 @@ bool bindPress[48] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 char key[5] = { 'W', 'S', 'A', 'D', ' ' }; //Holds a value for every BOUND key.
 bool keyPress[5] = { 0, 0, 0, 0, 0 }; 
 
+void sfw::rebind(char KEY, int fnct)
+{
+	if (fnct < 0) { fnct = 0; }
+	else if (fnct > 4) { fnct = 4; }
+	key[fnct] = KEY;
+}
 void resetKeys()
 {
 	for (int a = 0; a < 5; ++a)
@@ -135,22 +141,4 @@ char sfw::getInput(bool onlyNum)
 
 	resetKeys();
 	return press;
-}
-
-char getLetInput()
-{
-	char bindTo = '#';
-
-	for (int a = 0; bindings[a] != '\0'; ++a)
-	{
-		if (!bindPress[a] && sfw::getKey(bindings[a]))
-		{
-			bindTo = bindings[a];
-			bindPress[a] = true;
-		}
-	}
-
-	if (bindTo == bindings[44]) { bindTo = '"'; }
-	resetKeys();
-	return bindTo;
 }
